@@ -1,0 +1,66 @@
+<nav class="navbar navbar-light bg-success">
+    <div class="container fluid">
+        <h1 style="color:aliceblue">Micro Instagram</h1>
+        <div class="d-flex">
+            <button (click) = "clickAddImage()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-dark btn btn-light">
+                Upload new photo
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="card-group" style="display: inline-block;margin: auto;text-align: center;">
+    <div class="card mx-2 mb-2 mt-2" *ngFor = "let row of employeeData" style="width: 20rem;display: inline-block;vertical-align: top;">
+        <img class="card-img-top" class="img-thumbnail" src={{row.url}} alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{row.title}}</h5>
+          <p class="card-text">Click details for more...</p>
+        </div>
+        <div class="card-footer" style="margin: auto;">
+          <button type="button" class="btn btn-secondary" (click)="onEdit(row)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+          <button type="button" (click) = "deleteImage(row)" class="btn btn-danger mx-3">Delete</button>
+          <a [routerLink]="['/details', row.id]" class="btn btn-info">
+            Details
+          </a>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Image Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup] = "formValue">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input type="text" formControlName = "title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Url</label>
+                    <input type="text" formControlName = "url" class="form-control" id="exampleInputPassword1" placeholder="Url">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Description</label>
+                    <textarea type="text" formControlName = "description" class="form-control" id="exampleInputPassword1" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Dimensions</label>
+                    <input type="text" formControlName = "dimensions" class="form-control" id="exampleInputPassword1" placeholder="Dimensions">
+                    </div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" id="cancel" [hidden]="true" data-toggle="modal"        
+            data-target="#exampleModal" class="btn btn-secondary"                          
+           data-dismiss="modal">Close</button> -->
+            <button type="button" class="btn btn-secondary" data-target="#exampleModal" data-toggle="modal"  id = "cancel" data-dismiss="modal">Close</button>
+            <button type="button" *ngIf="showAdd" (click) = "postImageDetails()" class="btn btn-primary">Upload</button>
+            <button type="button" *ngIf="showUpdate" (click) = "updateImageDetails()" class="btn btn-primary">Update</button>
+        </div>
+    </div>
+</div>

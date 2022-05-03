@@ -3,9 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
 
 ## Command
-Run `npm install`
-Run `npm install -g json-server`
-Run `json-server --watch db.json`
+Run `npm install`, then `npm install -g json-server` and finally `json-server --watch db.json`
 
 ## Development server
 
